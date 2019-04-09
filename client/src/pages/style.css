@@ -1,0 +1,14 @@
+.img, .des {
+  position: relative;
+  float: left;
+}
+
+.img {
+  width: 160px;
+  height:200px;
+  margin: 20px;
+}
+
+.des {
+  margin-top: 20px;
+}

@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import SaveBtn from "../components/SaveBtn";
 import DeleteBtn from "../components/DeleteBtn";
-import Description from "../components/Description";
-import Image from "../components/Image";
 import Jumbotron from "../components/Jumbotron";
 import Results from "../components/Results";
 import API from "../utils/API";
@@ -10,6 +8,9 @@ import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import { Form, Input, FormBtn } from "../components/Form";
+import "./style.css";
+// import { relative } from "path";
+// import Description from "../components/Description";
 
 class Books extends Component {
   state = {
@@ -88,10 +89,13 @@ class Books extends Component {
                         <h3> {book.title} </h3>
                       </Link>
                       <h6> written by {book.authors[0]} </h6>
-                      <Image img={book.image} des={book.description} />
-                      <Description des={book.description} />
                       <DeleteBtn onClick={() => this.deleteBook(book._id)} />
                       <SaveBtn onClick={() => this.saveBook(book._id)} />
+
+                      {/* <Description img={book.image} des={book.description} > */}
+                      <img className="col-2 img" alt="book" src={book.image} />
+                      <span className="col-9 des" >{book.description}</span>
+                      {/* </Description> */}
                     </ListItem>
                   ))}
                 </List>

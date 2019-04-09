@@ -1,4 +1,7 @@
-.delete-btn {
+.save-btn {
+  position: absolute;
   float: right;
   color: green;
+  right:30px;
+  bottom:20px
 }
