@@ -8,6 +8,7 @@ const bookSchema = new Schema({
   link: { type: String, required: true },
   title: { type: String, required: true },
   saved: { type: Boolean, default: false },
+  Published: Date,
   date: { type: Date, default: Date.now }
 });
 
