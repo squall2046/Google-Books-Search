@@ -67,13 +67,13 @@ class Books extends Component {
                 value={this.state.title}
                 onChange={this.handleInputChange}
                 name="title"
-                placeholder="Title (required)"
+                placeholder="Book Title (required)"
               />
               <FormBtn
                 disabled={!(this.state.author && this.state.title)}
                 onClick={this.handleFormSubmit}
               >
-                Submit <i class="fas fa-book-open"></i>
+                <i class="fas fa-book-open"> Submit</i>
               </FormBtn>
             </Form>
           </Col>

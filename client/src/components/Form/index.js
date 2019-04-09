@@ -1,8 +1,9 @@
 import React from "react";
+import "./style.css";
 
 export function Form(props) {
   return (
-    <div style={{ textAlign: "center"}}>
+    <div id="form">
       {props.children}
     </div>
   );
@@ -11,7 +12,7 @@ export function Form(props) {
 export function Input(props) {
   return (
     <div className="form-group">
-      <input className="form-control" {...props} />
+      <input className="form-control input" {...props} />
     </div>
   );
 }
