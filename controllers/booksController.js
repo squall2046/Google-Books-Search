@@ -52,17 +52,43 @@ module.exports = {
   },
 
   saveBooks: function (req, res) {
-    // console.log("server side:", req.body)
-    db.Book.insertMany([{
-      authors: req.body[0].volumeInfo.authors,
-      description: req.body[0].volumeInfo.description,
-      img: req.body[0].volumeInfo.infoLink,
-      link: req.body[0].volumeInfo.infoLink,
-      title: req.body[0].volumeInfo.title,
-      saved: true
-    }])
+    db.Book
+      .findById(req.body[0].id)
+      .then(isSaved => {
+        // console.log("isSaved:", isSaved)
+        if (!isSaved) {
+          // console.log("server side:", req.body)
+          // db.Book.insertMany([{
+          db.Book.collection.insertMany([{
+            _id: req.body[0].id, //optional
+            title: req.body[0].volumeInfo.title,
+            subtitle: req.body[0].volumeInfo.subtitle,
+            authors: req.body[0].volumeInfo.authors,
+            rating: req.body[0].volumeInfo.averageRating,
+            image: req.body[0].volumeInfo.imageLinks.thumbnail,
+            link: req.body[0].volumeInfo.infoLink,
+            description: req.body[0].volumeInfo.description,
+            saved: true
+          }])
+            // alert("saved")
+            // return (
+            //   <SaveBtn>
+            //     <h3><i className="fas fa-save"></i></h3>
+            //   </SaveBtn>
+            // )
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
+        } else {
+          alert("it's already saved")
+        }
+      })
+  },
+
+  unsaveBooks: function (req, res) {
+    db.Book.findOneAndDelete({ _id: req.params.bookId })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
-  },
+  }
+
 
 };

@@ -28,4 +28,9 @@ router
   .route("/save")
   .post(booksController.saveBooks);
 
+// Matches with "/api/books/unsave/:bookId"
+router
+  .route("/unsave/:bookId")
+  .put(booksController.unsaveBooks);
+
 module.exports = router;

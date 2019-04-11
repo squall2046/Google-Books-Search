@@ -1,19 +1,41 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Col, Row, Container } from "../components/Grid";
-import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
-
-class Detail extends Component {
+import Results from "../components/Results";
+// import SaveBtn from "../components/SaveBtn";
+import UnsaveBtn from "../components/UnsaveBtn";
+import { Col, Row, Container } from "../components/Grid";
+import { List, ListItem } from "../components/List";
+import "./style.css";
+// import { relative } from "path";
+// import Description from "../components/Description";
+class Books extends Component {
   state = {
-    book: {}
+    books: [],
   };
-  // When this component mounts, grab the book with the _id of this.props.match.params.id
-  // e.g. localhost:3000/books/599dcb67f0f16317844583fc
+
   componentDidMount() {
-    API.getBook(this.props.match.params.id)
-      .then(res => this.setState({ book: res.data }))
+    this.loadBooks();
+  }
+
+  loadBooks = () => {
+    API.getBooks()
+      .then(res =>
+        this.setState({ books: res.data })
+      )
       .catch(err => console.log(err));
+  };
+
+  deleteBook = id => {
+    API.deleteBook(id)
+      .then(res => this.loadBooks())
+      .catch(err => console.log(err));
+  };
+
+  UnsaveBtnSubmit = bookId => {
+    API.unsaveTheBook(bookId)
+    .then(res => this.loadBooks())
+    .catch(err => console.log(err));
   }
 
   render() {
@@ -21,26 +43,33 @@ class Detail extends Component {
       <Container fluid>
         <Row>
           <Col size="md-12">
-            <Jumbotron>
-              <h1>
-                {this.state.book.title} by {this.state.book.author}
-              </h1>
-            </Jumbotron>
-          </Col>
-        </Row>
-        <Row>
-          <Col size="md-10 md-offset-1">
-            <article>
-              <h1>Synopsis</h1>
-              <p>
-                {this.state.book.synopsis}
-              </p>
-            </article>
-          </Col>
-        </Row>
-        <Row>
-          <Col size="md-2">
-            <Link to="/">← Back to Authors</Link>
+            <Results>
+              <div className="h1">Saved Books</div>
+              {this.state.books.length ? (
+                <List>
+                  {this.state.books
+                    .map(book => (
+                      <ListItem key={book._id} children={book}>
+                        <Link to={book.link}>
+                          <h3>{book.title}</h3>
+                        </Link>
+                        {book.subtitle ? <h4>—— {book.subtitle}</h4> : console.log(" books w/o subtitles")}
+                        <h5>by {book.authors}<i>{console.log(book)}</i></h5>
+                        {book.rating ? <h6 className="rating">Rating: {book.rating}</h6> : console.log(" books w/o rating")}
+                        {/* <SaveBtn onClick={() => this.saveBtnSubmit(book.id)} /> */}
+                        <UnsaveBtn onClick={() => this.UnsaveBtnSubmit(book._id)} />
+                        {/* <Description img={book.image} des={book.description} > */}
+                        {book.image ? <img className="col-md-3 mx-auto img" alt="book" src={book.image} /> : console.log(" books w/o image")}
+                        <div className="col-md-9 mx-auto des">{book.description}</div>
+                        {/* </Description> */}
+                      </ListItem>
+                    ))
+                  }
+                </List>
+              ) : (
+                  <h3> &nbsp; No Results to Display</h3>
+                )}
+            </Results>
           </Col>
         </Row>
       </Container>
@@ -48,4 +77,4 @@ class Detail extends Component {
   }
 }
 
-export default Detail;
+export default Books;

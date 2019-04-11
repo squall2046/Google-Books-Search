@@ -4,7 +4,7 @@ import API from "../utils/API";
 import Jumbotron from "../components/Jumbotron";
 import Results from "../components/Results";
 import SaveBtn from "../components/SaveBtn";
-import DeleteBtn from "../components/DeleteBtn";
+// import UnsaveBtn from "../components/UnsaveBtn";
 import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import { Form, Input, FormBtn } from "../components/Form";
@@ -22,7 +22,7 @@ class Books extends Component {
   // }
 
   // componentWillMount() {
-  //   this.handleFormSubmit();
+  //   this.loadBooks();
   // }
 
   loadBooks = () => {
@@ -87,15 +87,12 @@ class Books extends Component {
   };
 
   saveBtnSubmit = bookId => {
-    // event.preventDefault();
     // let theBook = this.state.books.map((book) => (book.id === bookId));
     let theBook = this.state.books.filter((book) => (book.id === bookId));
     // console.log(theBook)
+    // 'theBook' is 'bookData' in utils/API
     API.saveTheBook(theBook)
-  }
-
-  deleteBtnSubmit = event => {
-    // event.preventDefault();
+    .then(res => {alert("The Book has saved!")})
 
   }
 
@@ -124,6 +121,7 @@ class Books extends Component {
         <Row>
           <Col size="sm-12">
             <Results>
+              <div className="h1">Results</div>
               {this.state.books.length ? (
                 <List>
                   {this.state.books
@@ -134,9 +132,9 @@ class Books extends Component {
                         </Link>
                         {book.volumeInfo.subtitle ? <h4>—— {book.volumeInfo.subtitle}</h4> : console.log(" books w/o subtitles")}
                         <h5>by <i>{book.volumeInfo.authors}</i></h5>
-                        {book.volumeInfo.averageRating ? <h6 className="rating">Rating: {book.volumeInfo.averageRating}</h6> : <h6>Rating: N/A</h6>}
+                        {book.volumeInfo.averageRating ? <h6 className="rating">Rating: {book.volumeInfo.averageRating}</h6> :  console.log(" books w/o rating")}
                         <SaveBtn onClick={() => this.saveBtnSubmit(book.id)} />
-                        <DeleteBtn onClick={() => this.deleteBtnSubmit(book.id)} />
+                        {/* <UnsaveBtn onClick={() => this.UnsaveBtnSubmit(book.id)} /> */}
                         {/* <Description img={book.image} des={book.description} > */}
                         {book.volumeInfo.imageLinks ? <img className="col-md-3 mx-auto img" alt="book" src={book.volumeInfo.imageLinks.thumbnail} /> : console.log(" books w/o image")}
                         <div className="col-md-9 mx-auto des">{book.volumeInfo.description}</div>
@@ -146,7 +144,7 @@ class Books extends Component {
                   }
                 </List>
               ) : (
-                  <h3>No Results to Display</h3>
+                  <h3> &nbsp; No Results to Display</h3>
                 )}
             </Results>
           </Col>

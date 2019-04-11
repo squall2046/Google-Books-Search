@@ -25,7 +25,9 @@ export default {
     console.log("theBook:", bookData);
     return axios.post("/api/books/save", bookData);
     // return axios.post(`/api/books/save/${bookData}`);
-
   },
-
+  unsaveTheBook: (bookId) => {
+    console.log("theBook:", bookId);
+    return axios.put(`/api/books/unsave/${bookId}`);
+  },
 };
