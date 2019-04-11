@@ -38,8 +38,7 @@ module.exports = {
   },
 
   searchBooks: function (req, res) {
-    // set bookTitle to the req.body.title with spaces replaced with plus signs(+)
-    // let bookTitle = req.body.title.replace(/\s/g, "+");
+    // let bookTitle = req.params.bookTitle.replace(/\s/g, "+");
     let bookTitle = req.params.bookTitle.trim().split(" ").join("+");
     console.log("server side:", bookTitle);
     axios.get(
