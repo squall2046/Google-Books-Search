@@ -20,7 +20,7 @@ export function Input(props) {
 export function FormBtn(props) {
   return (
     <button {...props} style={{ marginBottom: 10 }} className="btn btn-success">
-      {props.children}
+      <i className="fas fa-book-open"> Submit</i>
     </button>
   );
 }

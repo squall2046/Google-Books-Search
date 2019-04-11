@@ -35,3 +35,7 @@
 .list-group {
   height: auto
 }
+
+.list-group-item {
+  padding: 3% 0% 1% 3%
+}

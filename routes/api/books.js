@@ -1,8 +1,11 @@
+require("dotenv").config();
+
 const router = require("express").Router();
 const booksController = require("../../controllers/booksController");
 
 // Matches with "/api/books"
-router.route("/")
+router
+  .route("/")
   .get(booksController.findAll)
   .post(booksController.create);
 
@@ -12,5 +15,10 @@ router
   .get(booksController.findById)
   .put(booksController.update)
   .delete(booksController.remove);
+
+// Matches with "/api/books/search/:bookTitle"
+router
+  .route("/search/:bookTitle")
+  .get(booksController.searchBooks)
 
 module.exports = router;

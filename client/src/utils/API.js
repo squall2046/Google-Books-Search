@@ -1,20 +1,34 @@
 import axios from "axios";
 
 export default {
-  // Gets all books
-  getBooks: function() {
+
+  getBooks: function () {
     return axios.get("/api/books");
   },
-  // Gets the book with the given id
-  getBook: function(id) {
+  getBook: function (id) {
     return axios.get("/api/books/" + id);
   },
-  // Deletes the book with the given id
-  deleteBook: function(id) {
+  saveBook: function (bookData) {
+    return axios.post("/api/books", bookData);
+  },
+  deleteBook: function (id) {
     return axios.delete("/api/books/" + id);
   },
-  // Saves a book to the database
-  saveBook: function(bookData) {
-    return axios.post("/api/books", bookData);
+
+
+  searchBooks: (bookTitle) => {
+    bookTitle = bookTitle.trim().split(" ").join("+");
+    console.log("client side:", bookTitle);
+    return axios.get(`/api/books/search/${ bookTitle }`);
   }
+
+  // searchBooks: function (props) {
+  //   let title = props.title.trim().split(" ").join("+")
+  //   console.log(title)
+  //   return axios.get("https://www.googleapis.com/books/v1/volumes?key=AIzaSyAYkUaZG7o4tvhJk_3007DEGWnj2czd1M8&q=" + title);
+  // },
+
+
+
+
 };

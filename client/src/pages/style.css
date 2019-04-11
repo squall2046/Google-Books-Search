@@ -1,14 +1,12 @@
 .img, .des {
-  position: relative;
-  float: left;
-}
-
-.img {
-  width: 160px;
-  height:200px;
-  margin: 20px;
-}
-
-.des {
-  margin-top: 20px;
-}
+    position: relative;
+    float: left;
+    margin: 20px 0;
+    font-size: 90%
+  }
+  .img {
+    max-width: 180px;
+    width: 100%;
+    height:auto;
+    padding: 0 10px
+  }
