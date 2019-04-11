@@ -44,7 +44,7 @@ module.exports = {
     console.log("server side:", bookTitle);
     axios.get(
       `https://www.googleapis.com/books/v1/volumes?q=${bookTitle}&key=${process.env.GOOGLE_API_KEY}`
-      // "https://www.googleapis.com/books/v1/volumes?key=AIzaSyAYkUaZG7o4tvhJk_3007DEGWnj2czd1M8&q=" + bookTitle
+      // "https://www.googleapis.com/books/v1/volumes?key=&q=" + bookTitle
     ).then(response => {
       res.json(response.data)
     }).catch(err => {
