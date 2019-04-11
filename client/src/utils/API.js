@@ -15,20 +15,10 @@ export default {
     return axios.delete("/api/books/" + id);
   },
 
-
   searchBooks: (bookTitle) => {
     bookTitle = bookTitle.trim().split(" ").join("+");
     console.log("client side:", bookTitle);
     return axios.get(`/api/books/search/${ bookTitle }`);
   }
-
-  // searchBooks: function (props) {
-  //   let title = props.title.trim().split(" ").join("+")
-  //   console.log(title)
-  //   return axios.get("https://www.googleapis.com/books/v1/volumes?key=AIzaSyAYkUaZG7o4tvhJk_3007DEGWnj2czd1M8&q=" + title);
-  // },
-
-
-
 
 };
