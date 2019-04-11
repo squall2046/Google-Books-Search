@@ -40,7 +40,7 @@ module.exports = {
   searchBooks: function (req, res) {
     // let bookTitle = req.params.bookTitle.replace(/\s/g, "+");
     let bookTitle = req.params.bookTitle.trim().split(" ").join("+");
-    console.log("server side:", bookTitle);
+    // console.log("server side:", bookTitle);
     axios.get(
       `https://www.googleapis.com/books/v1/volumes?q=${bookTitle}&key=${process.env.GOOGLE_API_KEY}`
       // "https://www.googleapis.com/books/v1/volumes?key=&q=" + bookTitle
@@ -49,6 +49,20 @@ module.exports = {
     }).catch(err => {
       res.json({ error: error })
     });
-  }
+  },
+
+  saveBooks: function (req, res) {
+    // console.log("server side:", req.body)
+    db.Book.insertMany([{
+      authors: req.body[0].volumeInfo.authors,
+      description: req.body[0].volumeInfo.description,
+      img: req.body[0].volumeInfo.infoLink,
+      link: req.body[0].volumeInfo.infoLink,
+      title: req.body[0].volumeInfo.title,
+      saved: true
+    }])
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
 
 };

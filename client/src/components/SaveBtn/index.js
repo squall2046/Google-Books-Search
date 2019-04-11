@@ -6,7 +6,7 @@ import "./style.css";
 function SaveBtn(props) {
   return (
     <span className="save-btn" {...props} role="button" tabIndex="0">
-     <h3><i class="fas fa-save"></i></h3>
+     <h3><i className="fas fa-save"></i></h3>
     </span>
   );
 }

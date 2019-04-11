@@ -15,10 +15,17 @@ export default {
     return axios.delete("/api/books/" + id);
   },
 
+
   searchBooks: (bookTitle) => {
     bookTitle = bookTitle.trim().split(" ").join("+");
     console.log("client side:", bookTitle);
-    return axios.get(`/api/books/search/${ bookTitle }`);
-  }
+    return axios.get(`/api/books/search/${bookTitle}`);
+  },
+  saveTheBook: (bookData) => {
+    console.log("theBook:", bookData);
+    return axios.post("/api/books/save", bookData);
+    // return axios.post(`/api/books/save/${bookData}`);
+
+  },
 
 };
