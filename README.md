@@ -1,6 +1,6 @@
 # 📘 Google-Books-Search
 
-#### Google Books Search API
+#### Google Books Search APP
 
 ## 
 ![concert](./client/public/w19.png)
@@ -12,17 +12,21 @@
 ![concert](./client/public/Snipaste_2019-04-12_12-49-58.png)
 
 #### 📗Technologies
-- [x] HTML5
+- [x] MongoDB Mongoose
+- [x] Node Express
+- [x] React
+- [x] Google Books API
 - [x] JavaScript/JQuery
 - [x] CSS/Bootstrap
-- [x] Firebase
-- [x] Moment.js
-- [x] Materialize.css
-- [x] animate.css/wow.js
-- [x] MealDB API
-- [x] TheCockTailDB API
 
-## 📓 Author
+#### 📘 Local Install
+
+* `git clone` or download from github
+* `npm i` in root, install npm packages
+* `npm start` to start node server and react server
+* open browser and load http://localhost:3000/
+
+#### 📓 Author
 * [Isaac Wu](https://github.com/squall2046)
 * [App demo](https://googlebooks-iw.herokuapp.com/)
 
