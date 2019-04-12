@@ -42,7 +42,7 @@ module.exports = {
     let bookTitle = req.params.bookTitle.trim().split(" ").join("+");
     // console.log("server side:", bookTitle);
     axios.get(
-      `https://www.googleapis.com/books/v1/volumes?q=${bookTitle}&max-results=50&key=${process.env.GOOGLE_API_KEY}`
+      `https://www.googleapis.com/books/v1/volumes?q=${bookTitle}&max-results=20&key=${process.env.GOOGLE_API_KEY}`
       // "https://www.googleapis.com/books/v1/volumes?key=&q=" + bookTitle
     ).then(response => {
       res.json(response.data)
