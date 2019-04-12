@@ -17,7 +17,15 @@ app.use(routes);
 app.use(express.static("client/public"));
 
 // Connect to the Mongo DB
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/googlebooks")
+// mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/googlebooks")
+const mongoURL = process.env.PROD_MONGODB || "mongodb://localhost/googlebooks"
+mongoose.connect(mongoURL, {useNewUrlParser: true})
+  .then(() => {
+    console.log("🌎 ==> Successfully connected to mongoDB.");
+  })
+  .catch((err) => {
+    console.log(`Error connecting to mongoDB: ${err}`);
+  });
 
 // Start the API server
 app.listen(PORT, function () {
