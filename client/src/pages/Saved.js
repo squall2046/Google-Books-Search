@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import API from "../utils/API";
 import Results from "../components/Results";
 // import SaveBtn from "../components/SaveBtn";
@@ -7,6 +6,7 @@ import UnsaveBtn from "../components/UnsaveBtn";
 import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import "./style.css";
+// import { Link } from "react-router-dom";
 // import { relative } from "path";
 // import Description from "../components/Description";
 class Books extends Component {
@@ -50,9 +50,9 @@ class Books extends Component {
                   {this.state.books
                     .map(book => (
                       <ListItem key={book._id} children={book}>
-                        <Link to={book.link}>
+                        <a href={book.link}>
                           <h3>{book.title}</h3>
-                        </Link>
+                        </a>
                         {book.subtitle ? <h4>—— {book.subtitle}</h4> : console.log(" books w/o subtitles")}
                         <h5>by {book.authors}<i>{console.log(book)}</i></h5>
                         {book.rating ? <h6 className="rating">Rating: {book.rating}</h6> : console.log(" books w/o rating")}

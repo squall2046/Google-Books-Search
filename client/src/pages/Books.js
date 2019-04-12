@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import API from "../utils/API";
 import Jumbotron from "../components/Jumbotron";
 import Results from "../components/Results";
@@ -9,6 +8,7 @@ import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import { Form, Input, FormBtn } from "../components/Form";
 import "./style.css";
+// import { Link } from "react-router-dom";
 // import { relative } from "path";
 // import Description from "../components/Description";
 class Books extends Component {
@@ -92,7 +92,7 @@ class Books extends Component {
     // console.log(theBook)
     // 'theBook' is 'bookData' in utils/API
     API.saveTheBook(theBook)
-    .then(res => {alert("The Book has saved!")})
+      .then(res => { alert("The Book has saved!") })
 
   }
 
@@ -127,12 +127,13 @@ class Books extends Component {
                   {this.state.books
                     .map(book => (
                       <ListItem key={book.id} children={book}>
-                        <Link to={book.volumeInfo.infoLink}>
+                        <a href={book.volumeInfo.infoLink} target="_blank">
                           <h3>{book.volumeInfo.title}</h3>
-                        </Link>
+                        </a>
+
                         {book.volumeInfo.subtitle ? <h4>—— {book.volumeInfo.subtitle}</h4> : console.log(" books w/o subtitles")}
                         <h5>by <i>{book.volumeInfo.authors}</i></h5>
-                        {book.volumeInfo.averageRating ? <h6 className="rating">Rating: {book.volumeInfo.averageRating}</h6> :  console.log(" books w/o rating")}
+                        {book.volumeInfo.averageRating ? <h6 className="rating">Rating: {book.volumeInfo.averageRating}</h6> : console.log(" books w/o rating")}
                         <SaveBtn onClick={() => this.saveBtnSubmit(book.id)} />
                         {/* <UnsaveBtn onClick={() => this.UnsaveBtnSubmit(book.id)} /> */}
                         {/* <Description img={book.image} des={book.description} > */}
