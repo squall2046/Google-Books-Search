@@ -127,7 +127,7 @@ class Books extends Component {
                   {this.state.books
                     .map(book => (
                       <ListItem key={book.id} children={book}>
-                        <a href={book.volumeInfo.infoLink} target="_blank">
+                        <a href={book.volumeInfo.infoLink} rel="noopener noreferrer" target="_blank">
                           <h3>{book.volumeInfo.title}</h3>
                         </a>
 
